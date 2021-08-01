@@ -4,7 +4,7 @@
 
 struct Pair
 {
-  char value[15];
+  char value[20];
   int key;
 };
 
@@ -110,7 +110,7 @@ void main()
     scanf("%d%s", &pairs[i].key, &pairs[i].value);
   }
 
-  int A[1000];
+  int A[100000];
   int c = 0;
 
   while (scanf("%d", &A[c]) != EOF)
@@ -118,9 +118,10 @@ void main()
 
   mergesort(pairs, 0, n - 1);
 
+  int index;
   for (int i = 0; i < c; i++)
   {
-    int index = binarySearch(pairs, n - 1, A[i]);
+    index = binarySearch(pairs, n - 1, A[i]);
     if (index == -1)
       printf("undefined\n");
     else
