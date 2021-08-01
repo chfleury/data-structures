@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
+struct Node
+{
   int data;
   struct Node *next;
-} *first;
+} * first;
 
-void create(int A[], int n) {
+void create(int A[], int n)
+{
   struct Node *last;
 
-  if (!n) {
+  if (!n)
+  {
     return;
   }
 
@@ -19,7 +22,8 @@ void create(int A[], int n) {
   last = first;
 
   struct Node *t;
-  for (int i = 1; i < n; i++) {
+  for (int i = 1; i < n; i++)
+  {
     t = (struct Node *)malloc(sizeof(struct Node));
     t->data = A[i];
     t->next = NULL;
@@ -28,8 +32,10 @@ void create(int A[], int n) {
   }
 }
 
-void display(struct Node *p) {
-   while(p) {
+void display(struct Node *p)
+{
+  while (p)
+  {
     printf("%d ", p->data);
     p = p->next;
   }
@@ -37,30 +43,37 @@ void display(struct Node *p) {
   printf("\n");
 }
 
-void recursiveDisplay(struct Node *p) {
-  if (p) {
+void recursiveDisplay(struct Node *p)
+{
+  if (p)
+  {
     printf("%d ", p->data);
 
     recursiveDisplay(p->next);
-
-  } else {
+  }
+  else
+  {
     printf("\n");
   }
 }
 
-void backwardsRecursiveDisplay(struct Node *p) {
-  if (p) {
+void backwardsRecursiveDisplay(struct Node *p)
+{
+  if (p)
+  {
     backwardsRecursiveDisplay(p->next);
-    
+
     printf("%d ", p->data);
   }
 }
 
-int lenght (struct Node *p) {
- 
+int lenght(struct Node *p)
+{
+
   int c = 0;
 
-  while (p) {
+  while (p)
+  {
     c++;
 
     p = p->next;
@@ -69,11 +82,14 @@ int lenght (struct Node *p) {
   return c;
 }
 
-int max (struct Node *p) {
+int max(struct Node *p)
+{
   int max = INT_MIN;
 
-  while (p) {
-    if (p->data > max) {
+  while (p)
+  {
+    if (p->data > max)
+    {
       max = p->data;
     }
 
@@ -83,11 +99,14 @@ int max (struct Node *p) {
   return max;
 }
 
-int min (struct Node *p) {
+int min(struct Node *p)
+{
   int min = INT_MAX;
 
-  while (p) {
-    if (p->data < min) {
+  while (p)
+  {
+    if (p->data < min)
+    {
       min = p->data;
     }
 
@@ -97,42 +116,52 @@ int min (struct Node *p) {
   return min;
 }
 
-void insert(struct Node *p, int index, int value) {
-  if (index < 0 || index > lenght(p)) return;
+void insert(struct Node *p, int index, int value)
+{
+  if (index < 0 || index > lenght(p))
+    return;
 
   struct Node *t;
   t = malloc(sizeof(struct Node));
   t->data = value;
 
-  if (index == 0) {
+  if (index == 0)
+  {
     t->next = first;
     first = t;
+  }
+  else
+  {
 
-  } else {
-
-    for (int i = 0; i < index - 1; i++) {
-       p = p->next;
+    for (int i = 0; i < index - 1; i++)
+    {
+      p = p->next;
     }
     t->next = p->next;
     p->next = t;
   }
 }
 
-void replace (struct Node *p, int x, int value) { // x is index to be inserted
-  if (x < 0 || x > lenght(p)) return;
+void replace(struct Node *p, int x, int value)
+{ // x is index to be inserted
+  if (x < 0 || x > lenght(p))
+    return;
 
   struct Node *t;
   t = malloc(sizeof(struct Node));
   t->data = value;
 
-  if (x == 0) {
+  if (x == 0)
+  {
     t->next = first->next;
     first = t;
-
-  } else {
+  }
+  else
+  {
     struct Node *q;
 
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < x; i++)
+    {
       q = p;
       p = p->next;
     }
@@ -142,13 +171,14 @@ void replace (struct Node *p, int x, int value) { // x is index to be inserted
   }
 }
 
-int main() {
+int main()
+{
   int A[] = {3, 5, 6, 10, 16, 11};
   create(A, 6);
 
   printf("Loop Display: ");
   display(first);
-  
+
   printf("Recursive Display: ");
   recursiveDisplay(first);
 
@@ -159,7 +189,7 @@ int main() {
   printf("Lenght: %d\n", lenght(first));
 
   printf("Min: %d  Max: %d\n", min(first), max(first));
-  
+
   insert(first, 0, 2);
   printf("Display after inserting 2 in first position: ");
   display(first);
@@ -170,11 +200,11 @@ int main() {
 
   printf("Display after replacing element of index 4 for 9: ");
   replace(first, 4, 9);
-  display(first);  
+  display(first);
 
   printf("Display after adding element 90 at the end of the list: ");
   insert(first, lenght(first), 90);
-  display(first);  
+  display(first);
 
   return 0;
 }
